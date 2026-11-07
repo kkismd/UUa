@@ -1,25 +1,38 @@
 # PC PoC
 
-UUaのPC参照実装を配置するディレクトリです。8ビットSBCを主体とし、UI/VDPの表示・入力と上位のアプリケーション意味論を分離する設計を、PC上で段階的に検証するための入口です。
+RustによるPC参照実装です。描画状態と論理画面はPCウィンドウ／入力ライブラリから独立させ、SBCがアプリケーション状態を所有する設計を維持します。
 
-## このディレクトリの責務
+## 実行基盤
 
-- PC側の実行コード、ウィンドウ・入力アダプタ、論理描画、PC側テストおよびビルド設定を後続Issueで管理する。
-- Pico 2のSDK・ツールチェーンやファームウェアのビルド成果物には依存しない。
-- SBC、VDP、GUI DSL、UI IR、通信、描画の役割は設計資料と採用済みADRに従う。未決定の契約はここで確定しない。
+- `render` は320×240、`0x00RRGGBB` の画素バッファと静的テストパターンを管理します。
+- `platform` はminifbウィンドウ、入力の取得、論理バッファの表示を担当します。
+- `main` はウィンドウの起動、更新ループ、終了を扱います。
+- UIオブジェクト、正式な入力意味論、文字描画、通信、GUI DSL/UI IRはこの段階に含みません。
 
-## 現在の状態
+## ビルドとテスト
 
-この段階ではディレクトリの案内のみを用意します。アプリケーション、Cargo設定、表示・入力処理、テスト、CIは未実装です。ここに記載するだけでPC PoCをビルド・実行できるわけではありません。
+Rust stable（edition 2024）と、minifbが必要とするホスト側ライブラリを用意してください。Linux環境ではX11/Wayland関連ライブラリが必要になる場合があります。
 
-## 後続作業
+```sh
+cargo build --manifest-path apps/pc-poc/Cargo.toml --locked
+cargo test --manifest-path apps/pc-poc/Cargo.toml --locked
+cargo fmt --manifest-path apps/pc-poc/Cargo.toml --check
+cargo clippy --manifest-path apps/pc-poc/Cargo.toml --all-targets -- -D warnings
+```
 
-- [Impl #11](https://github.com/kkismd/UUa/issues/11)：採用済みのPC技術選定ADRを前提に、最小起動、320×240論理表示、基本入力とヘッドレステストを実装する。
-- [Impl #13](https://github.com/kkismd/UUa/issues/13)：PC側の独立CIを整備する。
+## 起動と操作
+
+```sh
+cargo run --manifest-path apps/pc-poc/Cargo.toml --locked
+```
+
+320×240の論理テストパターンが640×480で表示されます。Escまたはウィンドウを閉じると終了します。ウィンドウにはキー押下（リピートなし）、マウス位置、左ボタン状態を取得する入力アダプタがあります。これらはアプリケーション向けSemanticイベントやIME契約を定めるものではありません。
 
 ## 関連資料
 
 - [リポジトリREADME](../../README.md)
 - [PoC戦略](../../docs/poc_strategy.md)
-- [開発・レビューの共通ルール](../../AGENTS.md)
 - [ADR #7（採用済み：独立ビルド構成）](https://github.com/kkismd/UUa/issues/7)
+- [ADR #8（採用済み：PC技術スタック）](https://github.com/kkismd/UUa/issues/8)
+- [Impl #11](https://github.com/kkismd/UUa/issues/11)
+- [Impl #13（独立CI）](https://github.com/kkismd/UUa/issues/13)

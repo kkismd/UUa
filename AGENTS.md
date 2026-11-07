@@ -118,7 +118,7 @@ PRレビュー・マージ
 
 - Issueの新規作成時は、`Task`、`Impl`、`ADR`、`Research`、`Tracker` の5つから内容に合う**分類ラベルを必ず1つだけ**付与する。Issueタイトルの接頭辞や本文の分類名だけでは代替しない。
 - 既存Issueを作業対象にするときも分類ラベルを確認し、未設定なら付与する。分類を変更する際は旧分類ラベルを外して付け替え、複数の分類ラベルを併存させない。
-- Researchの補助ラベルには、必要に応じて `Research_needs_ADR`、`Research_no_ADR`、`Research_superseded` を用いる。ADRの状態ラベルは `ADR_proposed`、`ADR_accepted`、`ADR_superseded`、`ADR_withdrawn`、`ADR_rejected` とする。これらは分類ラベルの代わりにはならず、判断の状態や結論については**本文を正本**とする。
+- ADRの状態やResearchの結論は各Issue本文に明示し、**本文を正本**とする。分類ラベルはIssueの種類のみを表す。
 
 ### Issue本文の更新規則
 

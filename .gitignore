@@ -1,0 +1,19 @@
+# PC PoC generated Rust build outputs
+/apps/pc-poc/target/
+
+# Pico 2 generated CMake build trees
+/firmware/pico2/build/
+/firmware/pico2/build-*/
+
+# Local Pico SDK checkout and generated firmware binaries
+/firmware/pico2/pico-sdk/
+/firmware/pico2/*.uf2
+/firmware/pico2/*.elf
+/firmware/pico2/*.bin
+/firmware/pico2/*.hex
+/firmware/pico2/*.map
+
+# Developer-local environment settings
+**/.env
+**/.env.*
+!**/.env.example

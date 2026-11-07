@@ -112,8 +112,13 @@ PRレビュー・マージ
 - **Research**：前提、選択肢、計測方法、比較結果、結論と残課題を記録する。調査結果をそのまま採用済み仕様とみなさない。
 - **ADR**：決定内容、採用理由、代替案、不変条件、影響、未決事項を記録する。状態は `提案中`、`採用`、`置換済み`、`撤回`、`却下` を明示する。
 - **Impl**：実装する責務、変更パス、対象外、依存、受け入れ条件、検証方法を具体化する。
+- **Task**：環境構築、開発ツールのセットアップ、実機接続や手順の検証など、リポジトリのコード・設定・文書の変更を主目的としない独立した作業を扱う。目的、手順、検証結果、完了条件を明記する。リポジトリの変更が主目的なら `Impl` とする。
 
-Researchの分類には、必要に応じて `Research_needs_ADR`、`Research_no_ADR`、`Research_superseded` を用いる。ADR状態ラベルは `ADR_proposed`、`ADR_accepted`、`ADR_superseded`、`ADR_withdrawn`、`ADR_rejected` とする。ラベルが未設定なら運用に合わせて整備し、**本文の結論が正本**であることを優先する。
+### Issue分類ラベル（必須）
+
+- Issueの新規作成時は、`Task`、`Impl`、`ADR`、`Research`、`Tracker` の5つから内容に合う**分類ラベルを必ず1つだけ**付与する。Issueタイトルの接頭辞や本文の分類名だけでは代替しない。
+- 既存Issueを作業対象にするときも分類ラベルを確認し、未設定なら付与する。分類を変更する際は旧分類ラベルを外して付け替え、複数の分類ラベルを併存させない。
+- Researchの補助ラベルには、必要に応じて `Research_needs_ADR`、`Research_no_ADR`、`Research_superseded` を用いる。ADRの状態ラベルは `ADR_proposed`、`ADR_accepted`、`ADR_superseded`、`ADR_withdrawn`、`ADR_rejected` とする。これらは分類ラベルの代わりにはならず、判断の状態や結論については**本文を正本**とする。
 
 ### Issue本文の更新規則
 

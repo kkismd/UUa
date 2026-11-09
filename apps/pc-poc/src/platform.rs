@@ -1,4 +1,4 @@
-use minifb::{Key, KeyRepeat, MouseButton, MouseMode, Scale, Window, WindowOptions};
+use minifb::{Key, KeyRepeat, MouseButton, MouseMode, Scale, UseGPU, Window, WindowOptions};
 
 use crate::render::{Framebuffer, HEIGHT, WIDTH};
 
@@ -21,6 +21,7 @@ impl Platform {
             HEIGHT,
             WindowOptions {
                 scale: Scale::X2,
+                use_gpu: UseGPU::Disabled,
                 ..WindowOptions::default()
             },
         )?;
